@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel serve index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "react": "^16.10.1",
