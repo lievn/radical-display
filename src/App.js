@@ -10,7 +10,6 @@ export default class App extends React.Component {
   render() {
     return (
       <Router>
-        <nav>NAVIGATTIE</nav>
         <Switch>
           <Route exact path="/">
             <Player />
