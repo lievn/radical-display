@@ -24,14 +24,14 @@ footer {
   position: absolute;
   left: 95%;
   top: 92%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 200;
-  border: 4px solid black;
+  border: 2px solid greenyellow;
   border-radius: 40px;
   padding: 5px 10px;
 }
 a {
-  color: red;
+  color: greenyellow;
   text-decoration: none;
   font-size: 1.2em;
 }
