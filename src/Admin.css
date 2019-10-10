@@ -1,0 +1,26 @@
+body {
+  background: greenyellow;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  background: white;
+  background-image: linear-gradient(
+    greenyellow,
+    rgba(255, 255, 255, 0),
+    greenyellow
+  );
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-family: monospace;
+  margin-top: 25%;
+  padding: 3em 1em 1em 6em;
+  color: rgb(40, 40, 0);
+}
+label {
+  margin-left: 20px;
+}
+button {
+  margin: 20px;
+}
