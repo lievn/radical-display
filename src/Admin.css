@@ -34,6 +34,21 @@ button {
   margin: 20px;
 }
 
+#uploader {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 50%;
+  height: 15px;
+  margin: 10px 0;
+}
+#uploader::-webkit-progress-bar {
+  background: rgb(255, 255, 255);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+#uploader::-webkit-progress-value {
+  background: greenyellow;
+}
+
 @keyframes animate {
   0%,
   100% {

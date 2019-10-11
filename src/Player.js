@@ -17,8 +17,8 @@ export default class Player extends React.Component {
     );
     const json = await res.json();
     this.setState({
-      queue: json.documents,
-      index: this.state.index
+      queue: json.documents
+      //index: this.state.index
     });
     this.checkVid();
   }
@@ -28,6 +28,7 @@ export default class Player extends React.Component {
       index: (this.state.index + 1) % this.state.queue.length
     });
     this.checkVid();
+    console.log(this.state.index);
   }
 
   checkVid() {

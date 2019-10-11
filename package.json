@@ -9,6 +9,7 @@
     "deploy": "firebase deploy"
   },
   "dependencies": {
+    "firebase": "^7.2.0",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-router-dom": "^5.1.2"

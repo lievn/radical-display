@@ -1,10 +1,24 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import "./Admin.css";
+import firebase from "firebase/app";
+import "firebase/storage";
 
 export default class Admin extends React.Component {
   constructor(props) {
     super(props);
+  }
+
+  storeFile(e) {
+    let uplo = document.querySelector("#uploader");
+    const file = e.target.files[0];
+    console.log(file);
+    const storageRef = firebase.storage().ref(file.name);
+    let task = storageRef.put(file);
+    task.on("state_changed", function progress(snapshot) {
+      let perc = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      uplo.value = perc;
+    });
   }
 
   render() {
@@ -13,10 +27,11 @@ export default class Admin extends React.Component {
         <div className="container">
           <h4>Add image/video</h4>
           <div className="form">
-            <label id="lab" htmlFor="file">
-              upload file:
-            </label>
-            <input type="file" id="file" />
+            <input type="file" id="file" onChange={this.storeFile} />
+            <br />
+            <progress value="5" max="100" id="uploader">
+              0%
+            </progress>
             <br />
             <label id="lab" htmlFor="sel">
               type:
