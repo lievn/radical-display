@@ -25,7 +25,7 @@ export default class Admin extends React.Component {
     return (
       <div className="noise">
         <div className="container">
-          <h4>Add image/video</h4>
+          <h3>Add image/video</h3>
           <div className="form">
             <input type="file" id="file" onChange={this.storeFile} />
             <br />

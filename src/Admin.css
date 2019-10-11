@@ -20,18 +20,23 @@ body {
     rgba(255, 255, 255, 1)
   );
   display: flex;
-  align-items: baseline;
+  align-items: end;
   justify-content: center;
   font-family: monospace;
-  margin-top: 25%;
+  margin-top: 20%;
   padding: 3em 1em 1em 6em;
   color: rgb(255, 250, 250);
 }
 label {
-  margin-left: 20px;
+  margin-left: 0px;
 }
 button {
-  margin: 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  padding-right: 5%;
 }
 
 #uploader {
