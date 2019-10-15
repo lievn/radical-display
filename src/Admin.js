@@ -11,6 +11,7 @@ export default class Admin extends React.Component {
     this.state = { bucket: "test", type: "" };
     this.sendToDB = this.sendToDB.bind(this);
     this.storeFile = this.storeFile.bind(this);
+    this.storeType = this.storeType.bind(this);
     this.db = firebase.database();
     this.ref = this.db.ref("/queue");
     console.log(this.ref);
@@ -19,14 +20,14 @@ export default class Admin extends React.Component {
   storeFile(e) {
     let uplo = document.querySelector("#uploader");
     const file = e.target.files[0];
-    // console.log(file);
     this.setState({
-      bucket: String(file.name)
+      bucket: String(file.name),
+      type: ""
     });
     const storageRef = firebase.storage().ref(file.name);
     let task = storageRef.put(file);
 
-    var x = this;
+    var thisParent = this;
     task.on(
       "state_changed",
       function progress(snapshot) {
@@ -39,19 +40,23 @@ export default class Admin extends React.Component {
         console.log(storageRef.getDownloadURL());
         storageRef.getDownloadURL().then(function(url) {
           console.log(url);
-          x.setState({
+          thisParent.setState({
             bucket: url
           });
         });
-        // var value = storageRef.getDownloadURL().then;
       }
     );
-    // this.sendToDB("", this.state.bucket);
+  }
+
+  storeType(e) {
+    var d = document.querySelector("select");
+    this.setState({
+      type: d.options[d.selectedIndex].value
+    });
   }
 
   sendToDB() {
-    var obj = { type: "video", url: this.state.bucket };
-    //this.ref.push(obj);
+    var obj = { type: this.state.type, url: this.state.bucket };
     console.log(obj);
     firebase
       .database()
@@ -74,7 +79,7 @@ export default class Admin extends React.Component {
             <label id="lab" htmlFor="sel">
               type:
             </label>
-            <select id="sel">
+            <select id="sel" onChange={this.storeType}>
               <option value="image">image</option>
               <option value="video">video</option>
             </select>
