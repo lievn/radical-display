@@ -15,7 +15,7 @@ export default class Player extends React.Component {
     };
     this.checkVid = this.checkVid.bind(this);
     this.goNext = this.goNext.bind(this);
-    this.changeInMillis = 1000;
+    this.changeInMillis = 5000;
   }
 
   async componentDidMount() {
