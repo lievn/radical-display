@@ -6,7 +6,6 @@ import Admin from "./Admin";
 import "./App.css";
 import firebase from "firebase/app";
 import "firebase/database";
-let db;
 
 export default class App extends React.Component {
   constructor(props) {

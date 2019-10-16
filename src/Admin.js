@@ -8,7 +8,7 @@ import "firebase/firestore";
 export default class Admin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bucket: "test", type: "" };
+    this.state = { bucket: "test", type: "", message: "" };
     this.sendToDB = this.sendToDB.bind(this);
     this.storeFile = this.storeFile.bind(this);
     this.storeType = this.storeType.bind(this);
@@ -37,8 +37,6 @@ export default class Admin extends React.Component {
       null,
       function(snapshot) {
         //console.log("upload complete!");
-        let pOut = document.querySelector(".done");
-        pOut.innerHTML = "upload complete";
         console.log(storageRef.getDownloadURL());
         storageRef.getDownloadURL().then(function(url) {
           console.log(url);
@@ -86,7 +84,7 @@ export default class Admin extends React.Component {
             <progress value="5" max="100" id="uploader">
               0%
             </progress>
-            <p className="done">.</p>
+            <p className="message">{this.state.message}</p>
             <br />
             <label id="lab" htmlFor="sel">
               type:
