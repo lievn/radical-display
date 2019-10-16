@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { DB_CONFIG } from "./DBconfig";
 import Player from "./Player";
 import Admin from "./Admin";
-import "./App.css";
 import firebase from "firebase/app";
 import "firebase/database";
 
