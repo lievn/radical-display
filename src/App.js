@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { DB_CONFIG } from "./DBconfig";
 import Player from "./Player";
 import Admin from "./Admin";
+import Overlord from "./Overlord";
 import firebase from "firebase/app";
-import "firebase/database";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -23,6 +23,9 @@ export default class App extends React.Component {
           </Route>
           <Route path="/admin">
             <Admin />
+          </Route>
+          <Route exact path="/overlord">
+            <Overlord />
           </Route>
           <Route>
             <p>404</p>
