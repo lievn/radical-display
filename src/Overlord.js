@@ -1,6 +1,7 @@
 import * as React from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "./Overlord.css";
 
 export default class Overlord extends React.Component {
   constructor(props) {
@@ -29,7 +30,7 @@ export default class Overlord extends React.Component {
       <div className="app">
         <h1>overlord</h1>
         {isLoading && <p className="loading">Loading...</p>}
-        <ul>{items.map(item => this._renderItem(item))}</ul>
+        <ul className="all">{items.map(item => this._renderItem(item))}</ul>
       </div>
     );
   }
