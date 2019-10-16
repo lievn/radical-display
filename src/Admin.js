@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Admin.css";
 import firebase from "firebase/app";
 import "firebase/storage";
-import "firebase/database";
+import "firebase/firestore";
 
 export default class Admin extends React.Component {
   constructor(props) {
@@ -12,9 +12,9 @@ export default class Admin extends React.Component {
     this.sendToDB = this.sendToDB.bind(this);
     this.storeFile = this.storeFile.bind(this);
     this.storeType = this.storeType.bind(this);
-    this.db = firebase.database();
-    this.ref = this.db.ref("/queue");
-    console.log(this.ref);
+    this.db = firebase.firestore();
+    //this.ref = this.db.ref("/queue");
+    //console.log(this.ref);
   }
 
   storeFile(e) {
@@ -36,7 +36,9 @@ export default class Admin extends React.Component {
       },
       null,
       function(snapshot) {
-        console.log("upload complete!");
+        //console.log("upload complete!");
+        let pOut = document.querySelector(".done");
+        pOut.innerHTML = "upload complete";
         console.log(storageRef.getDownloadURL());
         storageRef.getDownloadURL().then(function(url) {
           console.log(url);
@@ -58,10 +60,19 @@ export default class Admin extends React.Component {
   sendToDB() {
     var obj = { type: this.state.type, url: this.state.bucket };
     console.log(obj);
-    firebase
-      .database()
-      .ref("/queue")
-      .push(obj);
+    this.db
+      .collection("queue")
+      .add(obj)
+      .then(docRef => {
+        console.log(docRef.id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //.database()
+    //.ref("/queue")
+    //.push(obj);
   }
 
   render() {
@@ -75,6 +86,7 @@ export default class Admin extends React.Component {
             <progress value="5" max="100" id="uploader">
               0%
             </progress>
+            <p className="done">.</p>
             <br />
             <label id="lab" htmlFor="sel">
               type:
