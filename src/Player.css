@@ -12,19 +12,18 @@
 .videoContainer > video {
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
   position: absolute;
   top: 0px;
   left: 0px;
-  filter: sepia(0.8) hue-rotate(100deg);
 }
 .imgContainer > img {
   width: 100%;
   height: 100%;
   position: absolute;
+  object-fit: cover;
   top: 0px;
   left: 0px;
-  filter: sepia(0.8) hue-rotate(100deg);
 }
 footer {
   position: absolute;
