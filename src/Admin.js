@@ -157,7 +157,8 @@ export default class Admin extends React.Component {
             className="uploadButton"
             onClick={this._onClickUpload}
           >
-            Upload Image / Movie
+            <span className="uploadButton__background"></span>
+            <span className="uploadButton__label">Upload Image / Movie</span>
           </button>
           <input
             style={{ display: "none" }}
