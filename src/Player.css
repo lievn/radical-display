@@ -3,6 +3,12 @@
   height: 100%;
 }
 
+.videoContainer {
+  visibility: visible;
+}
+.imgContainer {
+  visibility: visible;
+}
 .videoContainer > video {
   width: 100%;
   height: 100%;
@@ -10,7 +16,6 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  z-index: 10;
   filter: sepia(0.8) hue-rotate(100deg);
 }
 .imgContainer > img {
@@ -19,7 +24,6 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  z-index: 110;
   filter: sepia(0.8) hue-rotate(100deg);
 }
 footer {

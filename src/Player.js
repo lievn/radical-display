@@ -5,10 +5,17 @@ import "./Player.css";
 export default class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { queue: [], index: 0 };
+    this.state = {
+      queue: [],
+      index: 0,
+      vid: "",
+      img: "",
+      vidVisual: "",
+      imgVisual: ""
+    };
     this.checkVid = this.checkVid.bind(this);
     this.goNext = this.goNext.bind(this);
-    this.changeInMillis = 5000;
+    this.changeInMillis = 1000;
   }
 
   async componentDidMount() {
@@ -18,7 +25,6 @@ export default class Player extends React.Component {
     const json = await res.json();
     this.setState({
       queue: json.documents
-      //index: this.state.index
     });
     this.checkVid();
   }
@@ -32,34 +38,40 @@ export default class Player extends React.Component {
   }
 
   checkVid() {
-    let i = document.querySelector("img");
     let v = document.querySelector("video");
+    console.log(this.state.imgVisual);
     if (this.state.queue[this.state.index].fields.type.stringValue == "image") {
-      i.src = this.state.queue[this.state.index].fields.url.stringValue;
-      i.style.zIndex = 100;
-      v.style.zIndex = 10;
+      this.setState({
+        img: this.state.queue[this.state.index].fields.url.stringValue,
+        imgVisual: "visible",
+        vidVisual: "hidden"
+      });
       setTimeout(this.goNext, this.changeInMillis);
     } else {
-      v.src = this.state.queue[this.state.index].fields.url.stringValue;
-      v.style.zIndex = 100;
-      i.style.zIndex = 10;
+      this.setState({
+        vid: this.state.queue[this.state.index].fields.url.stringValue,
+        imgVisual: "hidden",
+        vidVisual: "visible"
+      });
       v.addEventListener("ended", this.goNext);
-      //v.play();
+      v.play();
     }
   }
 
   render() {
     return (
       <div className="container">
-        <div className="imgContainer">
-          <img src="test.png" />
+        <div
+          className="imgContainer"
+          style={{ visibility: `${this.state.imgVisual}` }}
+        >
+          <img src={this.state.img} />
         </div>
-        <div className="videoContainer">
-          <video
-            autoPlay
-            muted
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-          ></video>
+        <div
+          className="videoContainer"
+          style={{ visibility: `${this.state.vidVisual}` }}
+        >
+          <video autoPlay muted src={this.state.vid}></video>
         </div>
         <footer>
           <Link to="/admin">π</Link>
