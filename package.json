@@ -6,15 +6,17 @@
   "scripts": {
     "start": "parcel serve index.html",
     "build": "parcel build index.html",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy",
+    "login": "firebase login"
   },
   "dependencies": {
-    "firebase": "^7.2.0",
+    "firebase": "7.2.1",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-router-dom": "^5.1.2"
   },
   "devDependencies": {
+    "firebase-tools": "7.6.0",
     "parcel-bundler": "^1.12.3"
   },
   "browserslist": [
