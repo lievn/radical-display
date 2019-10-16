@@ -13,12 +13,79 @@ const FILE_TYPES = {
   mp4: "movie"
 };
 
+function Shape({ x, y, size, className }) {
+  return (
+    <div
+      className={`shape ${className}`}
+      style={{
+        left: `${x}px`,
+        top: `${y}px`,
+        width: `${size}px`,
+        height: `${size}px`
+      }}
+    ></div>
+  );
+}
+
+function random(min, max) {
+  return min + Math.random() * (max - min);
+}
+
+function randInt(min, max) {
+  return Math.floor(random(min, max));
+}
+
+function choice(l) {
+  return l[Math.floor(Math.random() * l.length)];
+}
+
 export default class Admin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { message: "", uploadProgress: 0 };
+    this.state = {
+      message: "",
+      isUploading: false,
+      uploadProgress: 0,
+      shapes: []
+    };
     this.db = firebase.firestore();
+    this._nextShapeId = 1;
     this._onSelectFile = this._onSelectFile.bind(this);
+    this._updateShapes = this._updateShapes.bind(this);
+    this._onClickUpload = this._onClickUpload.bind(this);
+    window.setTimeout(this._updateShapes, random(100, 500));
+  }
+
+  _updateShapes() {
+    const SHAPE_CLASSES = [
+      "shape__rect-stroked",
+      "shape__rect-filled",
+      "shape__oval-filled",
+      "shape__oval-stroked"
+    ];
+    let shapes = this.state.shapes;
+    if (Math.random() > 0.9) {
+      shapes = shapes.splice(0, 1);
+    }
+    if (Math.random() > 0.2) {
+      const x = randInt(0, 80) * 25;
+      const y = randInt(0, 40) * 25;
+      const size = randInt(1, 10) * 50;
+      const className = choice(SHAPE_CLASSES);
+      shapes.push(
+        <Shape
+          key={this._nextShapeId}
+          x={x}
+          y={y}
+          size={size}
+          className={className}
+        />
+      );
+      this._nextShapeId++;
+    }
+    console.log(shapes);
+    this.setState({ shapes });
+    window.setTimeout(this._updateShapes, random(100, 500));
   }
 
   _onSelectFile(e) {
@@ -29,7 +96,7 @@ export default class Admin extends React.Component {
       .toLowerCase();
     const fileType = FILE_TYPES[fileExt];
     if (!fileType) {
-      this.setState({ message: "Unknown file type" });
+      this.setState({ message: "#ERR(9979)# Unknown file type" });
       return;
     }
     const storageRef = firebase.storage().ref(filename);
@@ -43,12 +110,12 @@ export default class Admin extends React.Component {
       },
       error => {
         this.setState({
-          message: "Error while uploading. Is your file too big?"
+          message: "#ERR(0967)# Error while uploading. Is your file too big?",
+          isUploading: false
         });
       },
       snapshot => {
         console.log("storageRef", storageRef);
-        this.setState({ message: "Upload completed. " });
         this._sendToDB(fileType, storageRef);
       }
     );
@@ -63,28 +130,50 @@ export default class Admin extends React.Component {
       .add(obj)
       .then(docRef => {
         console.log("docRef", docRef);
-        this.setState({ message: "//// Screen successfully hacked //// " });
+        this.setState({
+          message: "//// Upload Completed //// ",
+          isUploading: false
+        });
       })
       .catch(error => {
-        this.setState({ message: "Error while creating database entry" });
+        this.setState({ message: "#ERR(5633)# Error creating database entry" });
       });
   }
 
+  _onClickUpload() {
+    this.setState({ isUploading: true });
+    this._fileInput.click();
+  }
+
   render() {
-    const { uploadProgress, message } = this.state;
+    const { isUploading, uploadProgress, message, shapes } = this.state;
     return (
-      <div className="noise">
-        <div className="container">
-          <h3>Add image/video</h3>
-          <div className="form">
-            <input type="file" id="file" onChange={this._onSelectFile} />
-            <br />
-            <progress value="{ uploadProgress }" max="100" id="uploader">
-              0%
-            </progress>
-            <p className="message">{message}</p>
-          </div>
+      <div className="app">
+        <div className="form">
+          <h1>Admin Upload Interface</h1>
+          <h2>Access Forbidden</h2>
+          <button
+            disabled={isUploading}
+            className="uploadButton"
+            onClick={this._onClickUpload}
+          >
+            Upload Image / Movie
+          </button>
+          <input
+            style={{ display: "none" }}
+            type="file"
+            id="file"
+            ref={node => (this._fileInput = node)}
+            onChange={this._onSelectFile}
+          />
+          <progress
+            className="uploadProgress"
+            value={uploadProgress}
+            max={100}
+          />
+          <p className="message">&nbsp;{message}&nbsp;</p>
         </div>
+        <div className="shapes">{shapes}</div>
       </div>
     );
   }
