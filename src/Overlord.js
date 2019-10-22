@@ -7,6 +7,7 @@ export default class Overlord extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true, items: [] };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -21,6 +22,20 @@ export default class Overlord extends React.Component {
           data: docSnap.data()
         }));
         this.setState({ items, isLoading: false });
+      });
+  }
+
+  handleClick(e) {
+    console.log(e.item.id);
+    this._db
+      .collection("queue")
+      .doc(e.item.id)
+      .delete()
+      .then(function() {
+        console.log("Document successfully deleted!");
+      })
+      .catch(function(error) {
+        console.error("Error removing document: ", error);
       });
   }
 
@@ -39,7 +54,11 @@ export default class Overlord extends React.Component {
     console.log(item);
     if (item.data.type === "image") {
       return (
-        <div className="item" key={item.id}>
+        <div
+          className="item"
+          key={item.id}
+          onClick={this.handleClick.bind(this, { item })}
+        >
           <img src={item.data.url} alt="" width="100" />
         </div>
       );
