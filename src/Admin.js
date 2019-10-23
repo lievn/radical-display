@@ -158,7 +158,7 @@ export default class Admin extends React.Component {
   render() {
     const { isUploading, uploadProgress, message, shapes } = this.state;
     return (
-      <div className="app">
+      <div className="admin-app">
         <div className="form">
           <h1>Admin Upload Interface</h1>
           <h2>Access Forbidden</h2>
