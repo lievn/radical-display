@@ -1,6 +1,6 @@
 :root {
-  --yellow: #ffeb3f;
-  --purple: #f055ff;
+  --yellow: #ffffff;
+  --purple: #000000;
 }
 
 @font-face {
@@ -40,12 +40,19 @@ h2 {
 }
 
 .app {
+  background: transparent url(../img/dot.png);
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
+  animation: 1s glitch-in;
+  mix-blend-mode: hard-light;
 }
 
 .form {
