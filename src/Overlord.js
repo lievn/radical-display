@@ -79,7 +79,11 @@ export default class Overlord extends React.Component {
       );
     } else if (item.data.type === "movie") {
       return (
-        <div className="item" key={item.id}>
+        <div
+          className="item"
+          key={item.id}
+          onClick={this.handleClick.bind(this, { item })}
+        >
           <video src={item.data.url} width="100" />
         </div>
       );

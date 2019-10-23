@@ -123,7 +123,11 @@ export default class Admin extends React.Component {
 
   async _sendToDB(fileType, storageRef) {
     const fileUrl = await storageRef.getDownloadURL();
-    const obj = { type: fileType, url: fileUrl };
+    const obj = {
+      type: fileType,
+      url: fileUrl,
+      created: firebase.firestore.Timestamp.fromDate(new Date())
+    };
     console.log("_sendToDB", obj);
     this.db
       .collection("queue")
@@ -134,6 +138,7 @@ export default class Admin extends React.Component {
           message: "//// Upload Completed //// ",
           isUploading: false
         });
+        window.location.href = "/";
       })
       .catch(error => {
         this.setState({ message: "#ERR(5633)# Error creating database entry" });
