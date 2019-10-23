@@ -23,20 +23,35 @@ export default class Overlord extends React.Component {
         }));
         this.setState({ items, isLoading: false });
       });
+
+    this._db.collection("queue").onSnapshot(snap => {
+      snap.docChanges().forEach(change => {
+        if (change.type === "removed") {
+          const items = snap.docs.map(docSnap => ({
+            id: docSnap.id,
+            data: docSnap.data()
+          }));
+          this.setState({ items, isLoading: false });
+        }
+      });
+    });
   }
 
   handleClick(e) {
     console.log(e.item.id);
-    this._db
-      .collection("queue")
-      .doc(e.item.id)
-      .delete()
-      .then(function() {
-        console.log("Document successfully deleted!");
-      })
-      .catch(function(error) {
-        console.error("Error removing document: ", error);
-      });
+    const r = confirm("oh really?");
+    if (r == true) {
+      this._db
+        .collection("queue")
+        .doc(e.item.id)
+        .delete()
+        .then(function() {
+          console.log("Item successfully deleted!");
+        })
+        .catch(function(error) {
+          console.error("Error removing item: ", error);
+        });
+    }
   }
 
   render() {
