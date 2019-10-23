@@ -70,7 +70,7 @@ export default class Player extends React.Component {
     } else if (currentItem.type === "movie") {
       player = (
         <div className="videoContainer">
-          <video autoPlay muted loop src={currentItem.url} />
+          <video autoPlay muted src={currentItem.url} onEnded={this._goNext} />
         </div>
       );
     } else {
