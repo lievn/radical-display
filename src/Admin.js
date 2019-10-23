@@ -134,6 +134,7 @@ export default class Admin extends React.Component {
           message: "//// Upload Completed //// ",
           isUploading: false
         });
+        window.location.href = "/";
       })
       .catch(error => {
         this.setState({ message: "#ERR(5633)# Error creating database entry" });
