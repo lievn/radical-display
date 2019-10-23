@@ -23,6 +23,18 @@ export default class Overlord extends React.Component {
         }));
         this.setState({ items, isLoading: false });
       });
+
+    this._db.collection("queue").onSnapshot(snap => {
+      snap.docChanges().forEach(change => {
+        if (change.type === "removed") {
+          const items = snap.docs.map(docSnap => ({
+            id: docSnap.id,
+            data: docSnap.data()
+          }));
+          this.setState({ items, isLoading: false });
+        }
+      });
+    });
   }
 
   handleClick(e) {
