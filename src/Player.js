@@ -25,7 +25,6 @@ export default class Player extends React.Component {
       .orderBy("created", "desc")
       .onSnapshot(snap => {
         const documents = snap.docs.map(doc => doc.data());
-        console.log(documents);
         this.setState({
           queue: documents,
           index: 0
@@ -39,7 +38,6 @@ export default class Player extends React.Component {
       index: (this.state.index + 1) % this.state.queue.length
     });
 
-    console.log(this.state.index);
     this._scheduleNext();
   }
 
@@ -54,7 +52,6 @@ export default class Player extends React.Component {
     } else {
       return;
     }
-    console.log(time);
     window.clearTimeout(this._goNextTimeout);
     this._goNextTimeout = window.setTimeout(this._goNext, time);
   }
