@@ -4,22 +4,18 @@ import "./Player.css";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-const TIME_PER_ITEM_MILLIS = 8000;
+const TIME_PER_VIDEO_MILLIS = 60 * 1000;
+const TIME_PER_IMAGE_MILLIS = 10 * 1000;
 
 export default class Player extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       queue: [],
-      index: 0,
-      vid: "",
-      img: "",
-      vidVisual: "",
-      imgVisual: ""
+      index: 0
     };
     this._goNext = this._goNext.bind(this);
     this._goNextTimeout = null;
-    //this.changeInMillis = 5000;
   }
 
   async componentDidMount() {
@@ -35,16 +31,7 @@ export default class Player extends React.Component {
           index: 0
         });
         this._scheduleNext();
-        // this.checkVid();
       });
-    //   const res = await fetch(
-    //     "https://firestore.googleapis.com/v1/projects/radical-display/databases/(default)/documents/queue/"
-    //   );
-    //   const json = await res.json();
-    //   this.setState({
-    //     queue: json.documents
-    //   });
-    // setInterval(this._goNext, 5000);
   }
 
   _goNext() {
@@ -57,8 +44,19 @@ export default class Player extends React.Component {
   }
 
   _scheduleNext() {
+    const currentItem = this.state.queue[this.state.index];
+    if (!currentItem) return;
+    let time;
+    if (currentItem.type === "image") {
+      time = TIME_PER_IMAGE_MILLIS;
+    } else if (currentItem.type === "movie") {
+      time = TIME_PER_VIDEO_MILLIS;
+    } else {
+      return;
+    }
+    console.log(time);
     window.clearTimeout(this._goNextTimeout);
-    this._goNextTimeout = window.setTimeout(this._goNext, TIME_PER_ITEM_MILLIS);
+    this._goNextTimeout = window.setTimeout(this._goNext, time);
   }
 
   render() {
@@ -75,7 +73,7 @@ export default class Player extends React.Component {
     } else if (currentItem.type === "movie") {
       player = (
         <div className="videoContainer">
-          <video autoPlay muted src={currentItem.url} />
+          <video autoPlay muted loop src={currentItem.url} />
         </div>
       );
     } else {
