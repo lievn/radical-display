@@ -82,6 +82,24 @@ export default class Player extends React.Component {
         <footer>
           <Link to="/admin">π</Link>
         </footer>
+        <div class="player__overlay">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     );
   }
