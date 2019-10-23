@@ -22,6 +22,7 @@ export default class App extends React.Component {
             <Player />
           </Route>
           <Route path="/admin">
+            <Player />
             <Admin />
           </Route>
           <Route exact path="/overlord">

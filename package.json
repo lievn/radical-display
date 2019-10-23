@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel serve index.html",
-    "build": "parcel build index.html",
-    "deploy": "firebase deploy",
+    "dist": "rimraf dist && parcel build --no-source-maps index.html",
+    "build": "yarn run dist",
+    "deploy": "yarn run dist && firebase deploy",
     "login": "firebase login"
   },
   "dependencies": {
@@ -17,7 +18,8 @@
   },
   "devDependencies": {
     "firebase-tools": "7.6.0",
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "rimraf": "3.0.0"
   },
   "browserslist": [
     "last 1 Chrome versions"
