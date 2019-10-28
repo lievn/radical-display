@@ -83,12 +83,12 @@ export default class Admin extends React.Component {
       );
       this._nextShapeId++;
     }
-    console.log(shapes);
     this.setState({ shapes });
     window.setTimeout(this._updateShapes, random(100, 500));
   }
 
   _onSelectFile(e) {
+    this.setState({ isUploading: true });
     const file = e.target.files[0];
     const filename = file.name;
     const fileExt = filename
@@ -96,7 +96,10 @@ export default class Admin extends React.Component {
       .toLowerCase();
     const fileType = FILE_TYPES[fileExt];
     if (!fileType) {
-      this.setState({ message: "#ERR(9979)# Unknown file type" });
+      this.setState({
+        message: "#ERR(9979)# Unknown file type",
+        isUploading: false
+      });
       return;
     }
     const storageRef = firebase.storage().ref(filename);
@@ -141,19 +144,21 @@ export default class Admin extends React.Component {
         window.location.href = "/";
       })
       .catch(error => {
-        this.setState({ message: "#ERR(5633)# Error creating database entry" });
+        this.setState({
+          message: "#ERR(5633)# Error creating database entry",
+          isUploading: false
+        });
       });
   }
 
   _onClickUpload() {
-    this.setState({ isUploading: true });
     this._fileInput.click();
   }
 
   render() {
     const { isUploading, uploadProgress, message, shapes } = this.state;
     return (
-      <div className="app">
+      <div className="admin-app">
         <div className="form">
           <h1>Admin Upload Interface</h1>
           <h2>Access Forbidden</h2>

@@ -1,78 +1,84 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import "./Player.css";
+import firebase from "firebase/app";
+import "firebase/firestore";
+
+const TIME_PER_VIDEO_MILLIS = 60 * 1000;
+const TIME_PER_IMAGE_MILLIS = 10 * 1000;
 
 export default class Player extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       queue: [],
-      index: 0,
-      vid: "",
-      img: "",
-      vidVisual: "",
-      imgVisual: ""
+      index: 0
     };
-    this.checkVid = this.checkVid.bind(this);
-    this.goNext = this.goNext.bind(this);
-    this.changeInMillis = 5000;
+    this._goNext = this._goNext.bind(this);
+    this._goNextTimeout = null;
   }
 
   async componentDidMount() {
-    const res = await fetch(
-      "https://firestore.googleapis.com/v1/projects/radical-display/databases/(default)/documents/queue/"
-    );
-    const json = await res.json();
-    this.setState({
-      queue: json.documents
-    });
-    this.checkVid();
+    this._db = firebase.firestore();
+    this._db
+      .collection("queue")
+      .orderBy("created", "desc")
+      .onSnapshot(snap => {
+        const documents = snap.docs.map(doc => doc.data());
+        this.setState({
+          queue: documents,
+          index: 0
+        });
+        this._scheduleNext();
+      });
   }
 
-  goNext() {
+  _goNext() {
     this.setState({
       index: (this.state.index + 1) % this.state.queue.length
     });
-    this.checkVid();
-    console.log(this.state.index);
+
+    this._scheduleNext();
   }
 
-  checkVid() {
-    let v = document.querySelector("video");
-    console.log(this.state.imgVisual);
-    if (this.state.queue[this.state.index].fields.type.stringValue == "image") {
-      this.setState({
-        img: this.state.queue[this.state.index].fields.url.stringValue,
-        imgVisual: "visible",
-        vidVisual: "hidden"
-      });
-      setTimeout(this.goNext, this.changeInMillis);
+  _scheduleNext() {
+    const currentItem = this.state.queue[this.state.index];
+    if (!currentItem) return;
+    let time;
+    if (currentItem.type === "image") {
+      time = TIME_PER_IMAGE_MILLIS;
+    } else if (currentItem.type === "movie") {
+      time = TIME_PER_VIDEO_MILLIS;
     } else {
-      this.setState({
-        vid: this.state.queue[this.state.index].fields.url.stringValue,
-        imgVisual: "hidden",
-        vidVisual: "visible"
-      });
-      v.addEventListener("ended", this.goNext);
-      v.play();
+      return;
     }
+    window.clearTimeout(this._goNextTimeout);
+    this._goNextTimeout = window.setTimeout(this._goNext, time);
   }
 
   render() {
+    let player;
+    const currentItem = this.state.queue[this.state.index];
+    if (!currentItem) {
+      player = <h1>Loading...</h1>;
+    } else if (currentItem.type === "image") {
+      player = (
+        <div className="imgContainer">
+          <img src={currentItem.url} />
+        </div>
+      );
+    } else if (currentItem.type === "movie") {
+      player = (
+        <div className="videoContainer">
+          <video autoPlay muted src={currentItem.url} onEnded={this._goNext} />
+        </div>
+      );
+    } else {
+      player = <h1>Unknown item type {currentItem.type} </h1>;
+    }
     return (
       <div className="container">
-        <div
-          className="imgContainer"
-          style={{ visibility: `${this.state.imgVisual}` }}
-        >
-          <img src={this.state.img} />
-        </div>
-        <div
-          className="videoContainer"
-          style={{ visibility: `${this.state.vidVisual}` }}
-        >
-          <video autoPlay muted src={this.state.vid}></video>
-        </div>
+        {player}
         <footer>
           <Link to="/admin">π</Link>
         </footer>
