@@ -2,11 +2,11 @@
   --yellow: #ffffff;
   --purple: #000000;
 }
-/*
+
 @font-face {
   font-family: Hacked;
   src: url(../fonts/hacked.ttf);
-}*/
+}
 html {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
     monospace;
@@ -33,11 +33,13 @@ h2 {
 
 h1 {
   font-size: 2rem;
+  opacity: .5;
+  mix-blend-mode: hard-light;
+  animation: animate .2s linear 10;
 }
 
 h2 {
   font-size: 1.5rem;
-  color: red;
 }
 
 .admin-app {
@@ -69,7 +71,7 @@ h2 {
   border: 6px solid var(--yellow);
   background: black;
   outline: none;
-  /*font-family: Hacked, monospace;*/
+  font-family: Hacked, monospace;
   font-size: 2rem;
   cursor: pointer;
   text-transform: uppercase;
@@ -180,23 +182,6 @@ h3 {
   pointer-events: none;
 }
 
-.shape__rect-stroked {
-  border: 6px solid var(--yellow);
-}
-
-.shape__rect-filled {
-  background: var(--purple);
-}
-
-.shape__oval-filled {
-  background: var(--yellow);
-  border-radius: 50%;
-}
-
-.shape__oval-stroked {
-  border: 6px solid var(--yellow);
-  border-radius: 50%;
-}
 
 @keyframes glitch-in {
   0% {
@@ -248,4 +233,54 @@ h3 {
     opacity: 1;
     transform: translate(0, 0px);
   }
+}
+
+@keyframes animate
+{
+	0%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(0deg);
+	}
+	10%
+	{
+		background-position: 5px 0;
+	}
+	20%
+	{
+		background-position: -5px 0;
+	}
+	30%
+	{
+		background-position: 15px 0;
+	}
+	40%
+	{
+		background-position: -5px 0;
+	}
+	50%
+	{
+		background-position: -25px 0;
+	}
+	60%
+	{
+		background-position: -50px 0;
+	}
+	70%
+	{
+		background-position: 0 -20px;
+	}
+	80%
+	{
+		background-position: -60px -20px;
+	}
+	81%
+	{
+		background-position: 0 0;
+	}
+	100%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(360deg);
+	}
 }

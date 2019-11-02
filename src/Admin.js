@@ -12,7 +12,7 @@ const FILE_TYPES = {
   gif: "image",
   mp4: "movie"
 };
-
+/*
 function Shape({ x, y, size, className }) {
   return (
     <div
@@ -26,7 +26,7 @@ function Shape({ x, y, size, className }) {
     ></div>
   );
 }
-
+*/
 function random(min, max) {
   return min + Math.random() * (max - min);
 }
@@ -49,13 +49,13 @@ export default class Admin extends React.Component {
       shapes: []
     };
     this.db = firebase.firestore();
-    this._nextShapeId = 1;
+   /* this._nextShapeId = 1;*/
     this._onSelectFile = this._onSelectFile.bind(this);
-    this._updateShapes = this._updateShapes.bind(this);
+    /*this._updateShapes = this._updateShapes.bind(this);*/
     this._onClickUpload = this._onClickUpload.bind(this);
     window.setTimeout(this._updateShapes, random(100, 500));
   }
-
+/*
   _updateShapes() {
     const SHAPE_CLASSES = [
       "shape__rect-stroked",
@@ -86,7 +86,7 @@ export default class Admin extends React.Component {
     this.setState({ shapes });
     window.setTimeout(this._updateShapes, random(100, 500));
   }
-
+*/
   _onSelectFile(e) {
     this.setState({ isUploading: true });
     const file = e.target.files[0];
@@ -170,6 +170,7 @@ export default class Admin extends React.Component {
             <span className="uploadButton__background"></span>
             <span className="uploadButton__label">Upload Image / Movie</span>
           </button>
+          <p> <br/> </p>
           <input
             style={{ display: "none" }}
             type="file"

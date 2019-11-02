@@ -4,7 +4,7 @@ import { DB_CONFIG } from "./DBconfig";
 import Player from "./Player";
 import Admin from "./Admin";
 import AdminGlitch from "./AdminGlitch";
-import Glitch from "./Glitch";
+/*import Glitch from "./Glitch";*/
 import Overlord from "./Overlord";
 import firebase from "firebase/app";
 
@@ -25,9 +25,7 @@ export default class App extends React.Component {
           </Route>
           <Route path="/admin">
             <Player />
-            <AdminGlitch />
-            <Glitch />
-            
+            <Admin />
           </Route>
           <Route exact path="/overlord">
             <Overlord />
