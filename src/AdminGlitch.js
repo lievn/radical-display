@@ -46,17 +46,18 @@ export default class Admin extends React.Component {
     const { isUploading, uploadProgress, message, shapes } = this.state;
     return (
       <div className="admin-app">
-        <div className="form">
-          <h1>Admin ZZZZZUpload Interface</h1>
-          <h2>Accessssss Forbidden</h2>
+        <div className="formG">
+          <h1>Admin Upload Interface</h1>
+          <h2>Access Forbidden</h2>
           <button
             disabled={isUploading}
-            className="uploadButton"
+            className="uploadButtonG"
             onClick={this._onClickUpload}
           >
             <span className="uploadButton__background"></span>
             <span className="uploadButton__label">Upload Image / Movie</span>
           </button>
+          <p> <br/> </p>
           <input
             style={{ display: "none" }}
             type="file"
