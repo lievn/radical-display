@@ -71,7 +71,7 @@ export default class Admin extends React.Component {
             onChange={this._onSelectFile}
           />
           <progress
-            className="uploadProgress"
+            className="uploadProgressG"
             value={uploadProgress}
             max={100}
           />
@@ -79,10 +79,19 @@ export default class Admin extends React.Component {
         </div>
         <div className="shapes">{shapes}</div>
         <div class= "container">
-          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-        </div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+          <div></div><div></div><div></div>
+        </div>
       </div>
     );
   }

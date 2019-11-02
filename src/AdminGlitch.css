@@ -53,7 +53,6 @@ h2 { font-size: 1.5rem;
 }
 
 .admin-appG {
-  background: transparent url(../img/dot.png);
   position: fixed;
   top: 0;
   left: 0;
@@ -148,7 +147,7 @@ h2 { font-size: 1.5rem;
 }
 
 @keyframes change-bgcolor {
-  0%,20% {
+  0%,50% {
     opacity: 1;
   }
   10% {
@@ -158,11 +157,13 @@ h2 { font-size: 1.5rem;
 
 
 
-.uploadProgress {
+.uploadProgressG {
   display: block;
   width: 100%;
   height: 25px;
   background: black;
+  color:blue;
+  animation: animate .2s linear infinite;
 }
 
 .uploadProgress::-webkit-progress-bar {
@@ -188,45 +189,60 @@ h3 {
 
 
 .container { 
+  background: transparent url(../img/dot.png);
+
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1001;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
+  flex-direction: row-reverse;
+  height: 100vh;
+  width: 100vw;
   flex-wrap: wrap;
+  align-items: stretch;
+  animation: 5s animatedots linear infinite;
+
+
   } 
 .container > div {
-  background: green;
-  width: 20%;
-  flex: 1 1 auto;
-
+  background: black;
+  width: 6%;
+  flex-grow: 3;
 }
 .container > div:nth-child(odd) {
-  animation: change-bgcolor 2s linear infinite;
+  animation: change-bgcolor 1.6s linear infinite;
+
+  width: 10%;
 
   }
 .container > div:nth-child(even) {
   animation: change-bgcolor 3.6s linear infinite;
-
   }
 .container > div:nth-child(3),
 .container > div:nth-child(7),
 .container > div:nth-child(14),
 .container > div:nth-child(17),
-.container > div:nth-child(19) {
+.container > div:nth-child(19),
+.container > div:nth-child(24),
+.container > div:nth-child(32),
+.container > div:nth-child(36),
+.container > div:nth-child(41) {
   animation: change-bgcolor 1.3s linear infinite;
+  width: 35%;
 
   }
 .container > div:nth-child(2),
 .container > div:nth-child(4),
 .container > div:nth-child(9),
 .container > div:nth-child(13),
-.container > div:nth-child(20) {
+.container > div:nth-child(20),
+.container > div:nth-child(25),
+.container > div:nth-child(30),
+.container > div:nth-child(37),
+.container > div:nth-child(42) {
   animation: change-bgcolor 3s linear infinite;
+  width: 27%;
 
   }
 
@@ -358,5 +374,57 @@ h3 {
 	{
 		transform: translate(0, 0px);
 		filter: hue-rotate(360deg);
+  }
+}
+  
+  @keyframes animatedots
+{
+	0%
+	{
+    background-position: 0 0;
+    filter: hue-rotate(0deg);
+
+	}
+	10%
+	{
+		background-position: 5px 0;
+	}
+	20%
+	{
+		background-position: -5px 0;
+	}
+	30%
+	{
+		background-position: 15px 0;
+	}
+	40%
+	{
+		background-position: -5px 0;
+	}
+	50%
+	{
+		background-position: -25px 0;
+	}
+	60%
+	{
+		background-position: -50px 0;
+	}
+	70%
+	{
+		background-position: 0 -20px;
+	}
+	80%
+	{
+		background-position: -60px -20px;
+	}
+	81%
+	{
+		background-position: 0 0;
+	}
+	100%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(360deg);
 	}
 }
+
