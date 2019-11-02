@@ -45,10 +45,15 @@ export default class Admin extends React.Component {
   {
     const { isUploading, uploadProgress, message, shapes } = this.state;
     return (
-      <div className="admin-app">
+      <div className="admin-appG">
+
         <div className="formG">
-          <h1>Admin Upload Interface</h1>
-          <h2>Access Forbidden</h2>
+          <h1>
+          <div className = "G1">Admin Upload Interface</div>
+          </h1>
+          <h2>
+          <div className="G2">Access Forbidden</div>
+          </h2>
           <button
             disabled={isUploading}
             className="uploadButtonG"
@@ -73,6 +78,11 @@ export default class Admin extends React.Component {
           <p className="message">&nbsp;{message}&nbsp;</p>
         </div>
         <div className="shapes">{shapes}</div>
+        <div class= "container">
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+          <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        </div>
       </div>
     );
   }

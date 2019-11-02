@@ -23,10 +23,10 @@ export default class App extends React.Component {
           <Route exact path="/">
             <Player />
           </Route>
-          <Route path="/admin">
+          <Route path="/admin">  
             <Player />
             <Admin />  
-            <AdminGlitch/>          
+            <AdminGlitch/> 
           </Route>
           <Route exact path="/overlord">
             <Overlord />
