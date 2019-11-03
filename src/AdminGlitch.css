@@ -1,0 +1,417 @@
+:root {
+  --yellow: #ffffff;
+  --purple: #000000;
+}
+/*
+@font-face {
+  font-family: Hacked;
+  src: url(../fonts/hacked.ttf);
+}*/
+html {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier,
+    monospace;
+  font-size: 36px;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+}
+
+h1,
+h2 {
+  text-align: center;
+  text-transform: uppercase;
+
+}
+
+h1 {
+  font-size: 2rem;
+
+}
+
+h2 { font-size: 1.5rem;
+
+}
+
+.G1{
+  color:blue;
+  animation: animate .17s linear infinite;
+}
+
+.G2{
+  color:blue;
+  animation: animate .17s linear infinite;
+
+}
+
+.admin-appG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: 1s glitch-in;
+  mix-blend-mode: screen;
+  pointer-events: none;
+
+}
+
+.formG {
+  border: none;
+  padding: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadButtonG {
+  border: 6px solid red;
+  background: black;
+  outline: none;
+  /*font-family: Hacked, monospace;*/
+  font-size: 2rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: inherit;
+  padding: 25px;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  color:blue;
+  animation: animate .4s linear infinite;
+}
+
+
+
+.uploadButton__label {
+  display: block;
+  z-index: 5;
+  position: relative;
+}
+
+.uploadButton__background {
+  display: block;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--yellow);
+  clip-path: circle(0%);
+}
+
+.uploadButton:hover .uploadButton__background {
+  animation: 1s clippy forwards;
+}
+
+.uploadButton:hover .uploadButton__label {
+  animation: 0.8s change-color forwards;
+}
+
+@keyframes clippy {
+  from {
+    clip-path: circle(0%);
+  }
+  to {
+    clip-path: circle(100%);
+  }
+}
+
+@keyframes change-color {
+  from {
+    color: white;
+  }
+  to {
+    color: black;
+  }
+}
+
+@keyframes change-bgcolor {
+  0%,50% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+}
+
+
+
+.uploadProgressG {
+  display: block;
+  width: 100%;
+  height: 25px;
+  background: black;
+  color:blue;
+  animation: animate .2s linear infinite;
+}
+
+.uploadProgress::-webkit-progress-bar {
+  background: black;
+}
+
+.uploadProgress::-webkit-progress-value {
+  background: var(--yellow);
+}
+
+.message {
+  animation: 0.1s flicker infinite linear;
+}
+
+label {
+  margin-left: 0px;
+}
+
+h3 {
+  padding-right: 5%;
+}
+
+
+
+.containerG { 
+  background: transparent url(../img/dot.png);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100vh;
+  width: 100vw;
+  flex-wrap: wrap;
+  align-items: stretch;
+  animation: 5s animatedots linear infinite;
+
+
+  } 
+.containerG > div {
+  background: black;
+  width: 18%;
+  flex-grow: 3;
+
+}
+.containerG > div:nth-child(odd) {
+  animation: change-bgcolor 4.6s linear infinite;
+
+  width: 10%;
+
+  }
+.containerG > div:nth-child(even) {
+  animation: change-bgcolor 3.6s linear infinite;
+  }
+.containerG > div:nth-child(3),
+.containerG > div:nth-child(7),
+.containerG > div:nth-child(14),
+.containerG > div:nth-child(17),
+.containerG > div:nth-child(19),
+.containerG > div:nth-child(24),
+.containerG > div:nth-child(32),
+.containerG > div:nth-child(36),
+.containerG > div:nth-child(41) {
+  animation: change-bgcolor 1.3s linear infinite;
+  width: 35%;
+
+  }
+.containerG > div:nth-child(2),
+.containerG > div:nth-child(4),
+.containerG > div:nth-child(9),
+.containerG > div:nth-child(13),
+.containerG > div:nth-child(20),
+.containerG > div:nth-child(25),
+.containerG > div:nth-child(30),
+.containerG > div:nth-child(37),
+.containerG > div:nth-child(42) {
+  animation: change-bgcolor 3s linear infinite;
+  width: 27%;
+
+  }
+
+@keyframes flicker {
+  0%,
+  100% {
+    color: #64ffff;
+  }
+
+  50% {
+    color: #ff0011;
+    transform: translate(0, 0.5px);
+  }
+}
+
+
+
+.shape {
+  position: absolute;
+  animation: 0.3s glitch-in linear;
+  pointer-events: none;
+}
+
+
+@keyframes glitch-in {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translate(0, 20px);
+  }
+
+  20% {
+    opacity: 0;
+    transform: translate(0, -100px);
+  }
+
+  30% {
+    opacity: 1;
+    transform: translate(10px, 100px);
+  }
+
+  40% {
+    opacity: 0;
+    transform: translate(20px, 50px);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-10px, 50px);
+  }
+
+  60% {
+    opacity: 0;
+    transform: translate(0, 0px);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(0, 10px);
+  }
+
+  80% {
+    opacity: 0;
+    transform: translate(0, 20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+}
+
+@keyframes animate
+{
+	0%
+	{
+		transform: translate(0px, 0px);
+		filter: hue-rotate(0deg);
+	}
+	10%
+	{
+		transform: translate(18px, 10px);
+	}
+	20%
+	{
+		transform: translate(0px, -5px);
+	}
+	30%
+	{
+		transform: translate(9px, 0px);
+	}
+	40%
+	{
+		transform: translate(-5px, 0px);
+	}
+	50%
+	{
+		transform: translate(-7px, 0px);
+	}
+	60%
+	{
+		transform: translate(-10px, 0px);
+	}
+	70%
+	{
+		transform: translate(5px, -17px);
+	}
+	80%
+	{
+		transform: translate(-12px, -6px);
+	}
+	81%
+	{
+		transform: translate(0, 0px);
+	}
+	100%
+	{
+		transform: translate(0, 0px);
+		filter: hue-rotate(360deg);
+  }
+}
+  
+  @keyframes animatedots
+{
+	0%
+	{
+    background-position: 0 0;
+    filter: hue-rotate(0deg);
+
+	}
+	10%
+	{
+		background-position: 5px 0;
+	}
+	20%
+	{
+		background-position: -5px 0;
+	}
+	30%
+	{
+		background-position: 15px 0;
+	}
+	40%
+	{
+		background-position: -5px 0;
+	}
+	50%
+	{
+		background-position: -25px 0;
+	}
+	60%
+	{
+		background-position: -50px 0;
+	}
+	70%
+	{
+		background-position: 0 -20px;
+	}
+	80%
+	{
+		background-position: -60px -20px;
+	}
+	81%
+	{
+		background-position: 0 0;
+	}
+	100%
+	{
+		background-position: 0 0;
+		filter: hue-rotate(360deg);
+	}
+}
+

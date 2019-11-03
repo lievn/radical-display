@@ -79,9 +79,10 @@ export default class Player extends React.Component {
     return (
       <div className="container">
         {player}
-        <footer>
+        <div className = "footerG">
           <Link to="/admin">π</Link>
-        </footer>
+          <div className = "playerGlitch"></div>
+        </div>
       </div>
     );
   }
