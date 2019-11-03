@@ -24,16 +24,87 @@
   object-fit: contain;
   top: 0px;
   left: 0px;
+  
 }
-footer {
+.footerG {
+
+}
+
+.footerG:hover .playerGlitch {
+  animation: animateGlitch .6s linear infinite;
+  opacity: .3;
+  mix-blend-mode: hard-light;
+}
+a {
   position: absolute;
   left: 96%;
   top: 92%;
-}
-a {
   color: black;
   font-family: monospace;
   text-shadow: -1px -1px rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 1em;
+}
+
+.playerGlitch{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: contain;
+  top: 0px;
+  left: 0px;
+  z-index: 500;
+  background-image: url(../img/lenna.png);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes animateGlitch
+{
+	0%
+	{
+		transform: translate(0px, 0px);
+		filter: hue-rotate(0deg);
+	}
+	10%
+	{
+		transform: translate(18px, 10px);
+	}
+	20%
+	{
+		transform: translate(0px, -5px);
+	}
+	30%
+	{
+		transform: translate(9px, 0px);
+	}
+	40%
+	{
+		transform: translate(-5px, 0px);
+	}
+	50%
+	{
+		transform: translate(-7px, 0px);
+	}
+	60%
+	{
+		transform: translate(-10px, 0px);
+	}
+	70%
+	{
+		transform: translate(5px, -17px);
+	}
+	80%
+	{
+		transform: translate(-12px, -6px);
+	}
+	81%
+	{
+		transform: translate(0, 0px);
+	}
+	100%
+	{
+		transform: translate(0, 0px);
+		filter: hue-rotate(360deg);
+  }
 }
