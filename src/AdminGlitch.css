@@ -65,6 +65,8 @@ h2 { font-size: 1.5rem;
   z-index: 9999;
   animation: 1s glitch-in;
   mix-blend-mode: screen;
+  pointer-events: none;
+
 }
 
 .formG {
@@ -77,7 +79,7 @@ h2 { font-size: 1.5rem;
 }
 
 .uploadButtonG {
-  border: 6px solid var(--yellow);
+  border: 6px solid red;
   background: black;
   outline: none;
   /*font-family: Hacked, monospace;*/
@@ -90,15 +92,9 @@ h2 { font-size: 1.5rem;
   position: relative;
   z-index: 0;
   color:blue;
-  animation: animate .2s linear infinite;
+  animation: animate .4s linear infinite;
 }
 
-.uploadButtonG:hover {
-  color:blue;
-  animation: animate .2s linear infinite;
-
-
-}
 
 
 .uploadButton__label {
@@ -117,7 +113,6 @@ h2 { font-size: 1.5rem;
   height: 100%;
   background: var(--yellow);
   clip-path: circle(0%);
-  pointer-events: none;
 }
 
 .uploadButton:hover .uploadButton__background {
@@ -188,9 +183,8 @@ h3 {
 
 
 
-.container { 
+.containerG { 
   background: transparent url(../img/dot.png);
-
   position: absolute;
   top: 0;
   left: 0;
@@ -205,42 +199,43 @@ h3 {
 
 
   } 
-.container > div {
+.containerG > div {
   background: black;
-  width: 6%;
+  width: 18%;
   flex-grow: 3;
+
 }
-.container > div:nth-child(odd) {
-  animation: change-bgcolor 1.6s linear infinite;
+.containerG > div:nth-child(odd) {
+  animation: change-bgcolor 4.6s linear infinite;
 
   width: 10%;
 
   }
-.container > div:nth-child(even) {
+.containerG > div:nth-child(even) {
   animation: change-bgcolor 3.6s linear infinite;
   }
-.container > div:nth-child(3),
-.container > div:nth-child(7),
-.container > div:nth-child(14),
-.container > div:nth-child(17),
-.container > div:nth-child(19),
-.container > div:nth-child(24),
-.container > div:nth-child(32),
-.container > div:nth-child(36),
-.container > div:nth-child(41) {
+.containerG > div:nth-child(3),
+.containerG > div:nth-child(7),
+.containerG > div:nth-child(14),
+.containerG > div:nth-child(17),
+.containerG > div:nth-child(19),
+.containerG > div:nth-child(24),
+.containerG > div:nth-child(32),
+.containerG > div:nth-child(36),
+.containerG > div:nth-child(41) {
   animation: change-bgcolor 1.3s linear infinite;
   width: 35%;
 
   }
-.container > div:nth-child(2),
-.container > div:nth-child(4),
-.container > div:nth-child(9),
-.container > div:nth-child(13),
-.container > div:nth-child(20),
-.container > div:nth-child(25),
-.container > div:nth-child(30),
-.container > div:nth-child(37),
-.container > div:nth-child(42) {
+.containerG > div:nth-child(2),
+.containerG > div:nth-child(4),
+.containerG > div:nth-child(9),
+.containerG > div:nth-child(13),
+.containerG > div:nth-child(20),
+.containerG > div:nth-child(25),
+.containerG > div:nth-child(30),
+.containerG > div:nth-child(37),
+.containerG > div:nth-child(42) {
   animation: change-bgcolor 3s linear infinite;
   width: 27%;
 

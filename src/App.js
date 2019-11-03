@@ -27,6 +27,7 @@ export default class App extends React.Component {
             <Player />
             <Admin />  
             <AdminGlitch/> 
+            
           </Route>
           <Route exact path="/overlord">
             <Overlord />

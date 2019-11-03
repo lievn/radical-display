@@ -35,9 +35,10 @@ export default class Admin extends React.Component {
     this.db = firebase.firestore();
     this._nextShapeId = 1;
     this._onSelectFile = this._onSelectFile.bind(this);
-    //this._updateShapes = this._updateShapes.bind(this);
+    this._updateShapes = this._updateShapes.bind(this);
     this._onClickUpload = this._onClickUpload.bind(this);
     window.setTimeout(this._updateShapes, random(100, 500));*/
+
   }
 
 
@@ -54,22 +55,12 @@ export default class Admin extends React.Component {
           <h2>
           <div className="G2">Access Forbidden</div>
           </h2>
-          <button
-            disabled={isUploading}
-            className="uploadButtonG"
-            onClick={this._onClickUpload}
-          >
+          <button className="uploadButtonG">
             <span className="uploadButton__background"></span>
             <span className="uploadButton__label">Upload Image / Movie</span>
           </button>
           <p> <br/> </p>
-          <input
-            style={{ display: "none" }}
-            type="file"
-            id="file"
-            ref={node => (this._fileInput = node)}
-            onChange={this._onSelectFile}
-          />
+
           <progress
             className="uploadProgressG"
             value={uploadProgress}
@@ -78,7 +69,7 @@ export default class Admin extends React.Component {
           <p className="message">&nbsp;{message}&nbsp;</p>
         </div>
         <div className="shapes">{shapes}</div>
-        <div class= "container">
+        <div class= "containerG">
           <div></div><div></div><div></div>
           <div></div><div></div><div></div>
           <div></div><div></div><div></div>
