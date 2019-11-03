@@ -31,9 +31,11 @@
 }
 
 .footerG:hover .playerGlitch {
-  animation: animateGlitch .6s linear infinite;
-  opacity: .3;
-  mix-blend-mode: hard-light;
+  animation: animateGlitch .6s linear;
+}
+
+a:hover {
+  animation: animateGlitch2 .6s linear;
 }
 a {
   position: absolute;
@@ -54,21 +56,31 @@ a {
   top: 0px;
   left: 0px;
   z-index: 500;
-  background-image: url(../img/lenna.png);
+  background-image: url(../img/GlitchBG.png);
   opacity: 0;
   pointer-events: none;
+  /*mix-blend-mode: screen;*/
 }
 
-@keyframes animateGlitch
+@keyframes animateGlitch{
+  0%,15%,25%,55%,80%,100%{
+    opacity: 0;
+  }
+  10%, 20%, 48%, 75%, 92%{
+    opacity: 1;
+  }
+}
+
+@keyframes animateGlitch2
 {
 	0%
 	{
 		transform: translate(0px, 0px);
-		filter: hue-rotate(0deg);
-	}
+    color:red;
+  }
 	10%
 	{
-		transform: translate(18px, 10px);
+		transform: translate(9px, 10px);
 	}
 	20%
 	{
@@ -76,11 +88,12 @@ a {
 	}
 	30%
 	{
-		transform: translate(9px, 0px);
+		transform: translate(4px, 0px);
 	}
 	40%
 	{
-		transform: translate(-5px, 0px);
+    transform: translate(-5px, 0px);
+    color: cyan;
 	}
 	50%
 	{
@@ -88,15 +101,16 @@ a {
 	}
 	60%
 	{
-		transform: translate(-10px, 0px);
+    transform: translate(-5px, 0px);
+    color: red;
 	}
 	70%
 	{
-		transform: translate(5px, -17px);
+		transform: translate(5px, -8px);
 	}
 	80%
 	{
-		transform: translate(-12px, -6px);
+		transform: translate(-6px, -6px);
 	}
 	81%
 	{
@@ -105,6 +119,5 @@ a {
 	100%
 	{
 		transform: translate(0, 0px);
-		filter: hue-rotate(360deg);
   }
 }
